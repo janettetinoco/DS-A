@@ -41,3 +41,51 @@ function isValidSubsequence1(array, sequence) {
     }
     return otherIdx === sequence.length
 }
+
+//Return sorted array of squares of given array
+//O(nlogn) time |o(n) space
+function sortedSquaredArray(array) {
+    // Write your code here.
+    let squares = [];
+    array.map((ele) => {
+        squares.push(ele * ele)
+    })
+    return squares.sort((a, b) => a - b);
+}
+
+//Tournament winner
+//O(n) time |O(k) space, n is competitions, k is teams
+function tournamentWinner(competitions, results) {
+    // Write your code here.
+    let scores = {};
+    for (let i = 0; i < competitions.length; i++) {
+        let winner = competitions[i][0];
+        if (results[i] === 1 && scores[winner]) {
+            scores[winner] += 3
+        } else if (results[i] === 1) {
+            scores[winner] = 3
+        } else if (scores[competitions[i][1]]) {
+            scores[competitions[i][1]] += 3
+        } else {
+            scores[competitions[i][1]] = 3
+        }
+    }
+    return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+}
+
+//Find lest amount that can be constructed from give change array
+//O(nlogn) time |O(1) space
+function nonConstructibleChange(coins) {
+    // Write your code here.
+    if (coins.length === 1 && coins[0] !== 1) return 1;
+    let sortedCoins = coins.sort((a, b) => a - b);
+    let minChange = 0;
+    for (let i = 0; i < sortedCoins.length; i++) {
+        minChange += sortedCoins[i]
+        if (sortedCoins[i + 1] > minChange + 1) {
+            return minChange + 1;
+        }
+    }
+
+    return minChange += 1;
+}
