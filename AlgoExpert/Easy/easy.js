@@ -89,3 +89,38 @@ function nonConstructibleChange(coins) {
 
     return minChange += 1;
 }
+//find nth fibonacci number: 0,1,1,2,3,5,...
+//O(2^n) time | O(n) space
+function getNthFib(n) {
+    // Write your code here.
+    if (n <= 1) return 0;
+    if (n === 2) return 1;
+    return getNthFib(n - 1) + getNthFib(n - 2);
+}
+
+//using memoization
+//O(n) time | O(n) space
+function getNthFib(n, memoize = { 1: 0, 2: 1 }) {
+    // Write your code here.
+    if (memoize[n] !== undefined) {
+        return memoize[n];
+    } else {
+        memoize[n] = getNthFib(n - 1, memoize) + getNthFib(n - 2, memoize);
+        return memoize[n];
+    }
+}
+
+//Add up all elements of an array multiplying by the depth of the array for each element
+//O(n) time | O(d) space where n is elments in array, d is the greatest depth
+function productSum(array, level = 1) {
+    // Write your code here.
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (Array.isArray(array[i])) {
+            sum += productSum(array[i], level + 1)
+        } else {
+            sum += array[i];
+        }
+    }
+    return sum * level;
+}
