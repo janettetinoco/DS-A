@@ -124,3 +124,40 @@ function productSum(array, level = 1) {
     }
     return sum * level;
 }
+
+
+//Binary Search
+//O(logn) time | O(log n) space
+function binarySearch(array, target) {
+    // Write your code here.
+    if (array.length === 0) return -1
+    let mid = Math.floor(array.length / 2);
+    if (array[mid] === target) {
+        return mid
+    } else if (array[mid] > target) {
+        return binarySearch(array.slice(0, mid), target)
+    } else {
+        let result = binarySearch(array.slice(mid + 1), target)
+        if (result === -1) {
+            return -1
+        } else {
+            return result + mid + 1
+        }
+    }   
+}
+
+//Find the 3 largest nubers in a given array
+//O(n log n) time | O(n log n) space
+function findThreeLargestNumbers(array) {
+    // Write your code here.
+    let maxArray = array.slice(0, 3).sort((a, b) => a - b);
+    for (let i = 0; i < array.length - 3; i++) {
+        let remainingArray = array.slice(3);
+        if (remainingArray[i] > maxArray[0]) {
+            maxArray.push(remainingArray[i])
+            maxArray = maxArray.slice(1).sort((a, b) => a - b)
+        }
+    }
+    return maxArray
+
+}
