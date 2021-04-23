@@ -161,3 +161,41 @@ function findThreeLargestNumbers(array) {
     return maxArray
 
 }
+
+//Arrange two rows of students so all students in second row are taller than the first row
+//O(nlogn) time | O(1) space
+function classPhotos(redShirtHeights, blueShirtHeights) {
+    // Write your code here.
+    redShirtHeights = redShirtHeights.sort((a, b) => a - b);
+    blueShirtHeights = blueShirtHeights.sort((a, b) => a - b);
+    let redFront = redShirtHeights[0] - blueShirtHeights[0] <= 0
+    for (let i = 0; i < redShirtHeights.length; i++) {
+        if (redShirtHeights[i] <= blueShirtHeights[i] && !redFront) {
+            return false
+        } else if (redShirtHeights[i] >= blueShirtHeights[i] && redFront) {
+            return false
+        }
+    }
+    return true;
+}
+
+//Tandem Bike: find the fastest or slowest total speeds of tandem bikers
+//O(nlogn) time | O(1) space
+function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
+    // Write your code here.
+    redShirtSpeeds = redShirtSpeeds.sort((a, b) => a - b)
+    if (!fastest) {
+        blueShirtSpeeds = blueShirtSpeeds.sort((a, b) => a - b)
+    } else {
+        blueShirtSpeeds = blueShirtSpeeds.sort((a, b) => b - a)
+    }
+    let time = 0;
+    for (let i = 0; i < redShirtSpeeds.length; i++) {
+        if (redShirtSpeeds[i] > blueShirtSpeeds[i]) {
+            time += redShirtSpeeds[i];
+        } else {
+            time += blueShirtSpeeds[i];
+        }
+    }
+    return time;
+}
