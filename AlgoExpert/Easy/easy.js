@@ -199,3 +199,38 @@ function tandemBicycle(redShirtSpeeds, blueShirtSpeeds, fastest) {
     }
     return time;
 }
+
+//Bubble Sort
+//O(n^2) time | O(1) space
+function bubbleSort(array) {
+    // Write your code here.
+    let sorted = false;
+    while (!sorted) {
+        sorted = true;
+        for (let i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                let tempL = array[i + 1]
+                let tempG = array[i]
+                array[i] = tempL
+                array[i + 1] = tempG
+                sorted = false;
+            }
+        }
+    }
+    return array
+}
+
+//Insertion sort: pick an index and keep swaping witht he values before until
+//it is no longer less than the previous value
+//O(n^2) time | O(1) space
+function insertionSort(array) {
+    // Write your code here.
+    for (let i = 0; i < array.length; i++) {//indexing through array
+        let j = i;//the index checking the sub arrray before
+        while (j > 0 && array[j] < array[j - 1]) {
+            [array[j], array[j - 1]] = [array[j - 1], array[j]]
+            j -= 1
+        }
+    }
+    return array;
+}
