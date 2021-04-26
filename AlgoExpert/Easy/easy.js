@@ -234,3 +234,21 @@ function insertionSort(array) {
     }
     return array;
 }
+
+//Check if a givcen string is a palindrome
+//
+function isPalindrome(string) {
+    // Write your code here.
+    return string === string.split("").reverse().join("")
+}
+
+//O(n) time | O(1) space
+function isPalindrome(string) {
+    // Write your code here.
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] !== string[string.length - i - 1]) {
+            return false
+        }
+    }
+    return true
+}
