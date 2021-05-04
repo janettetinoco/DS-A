@@ -125,3 +125,53 @@ var reverseStr = function (s, k) {
 var reverseString = function (s) {
     return s.reverse()
 };
+
+var singleNumber = function (nums) {
+    let n = {}
+    nums.map((num) => {
+        if (n[num]) {
+            n[num] += 1
+        } else {
+            n[num] = 1
+        }
+    })
+    for (let key in n) {
+        if (n[key] === 1) return key;
+    }
+};
+
+
+var sortedArrayToBST = function (nums) {
+    if (nums.length === 1) return new TreeNode(nums[0]);
+    if (nums.length === 0) return null;
+    let mid = Math.floor(nums.length / 2)
+    let root = new TreeNode(nums[mid]);
+    root.left = sortedArrayToBST(nums.slice(0, mid))
+    root.right = sortedArrayToBST(nums.slice(mid + 1))
+
+    return root
+
+};
+
+// Given an integer n, return a string array answer(1 - indexed) where:
+// answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+// answer[i] == "Fizz" if i is divisible by 3.
+// answer[i] == "Buzz" if i is divisible by 5.
+// answer[i] == i if non of the above conditions are true.
+var fizzBuzz = function (n) {
+    let answer = [];
+    for (let i = 1; i <= n; i++) {
+        let ans = ""
+        if (i % 3 === 0) {
+            ans += "Fizz";
+        }
+        if (i % 5 === 0) {
+            ans += "Buzz"
+        }
+        if (ans.length === 0) {
+            ans += `${i}`
+        }
+        answer.push(ans)
+    }
+    return answer
+};
