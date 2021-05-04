@@ -102,3 +102,26 @@ var smallerNumbersThanCurrent = function (nums) {
     }
     return count
 };
+
+var reverseStr = function (s, k) {
+    let final = ""//ba
+    let sArr = s.split("")
+    let i = 0;//2
+    while (i < s.length) {//abcd
+        if (i % (2 * k) === 0 || i === 0) {
+            final += sArr.slice(i, i + k).reverse().join("")
+            i += k
+        } else if (i % k === 0 && i <= s.length - 2) {//2
+            final += sArr.slice(i, i + k).join("")
+            i += k
+        } else if (i >= s.length - 2) {
+            final += sArr.slice(final.length)
+            break;
+        }
+    }
+    return final
+};
+
+var reverseString = function (s) {
+    return s.reverse()
+};
