@@ -175,3 +175,77 @@ var fizzBuzz = function (n) {
     }
     return answer
 };
+
+//Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+var isAnagram = function (s, t) {
+    let letters = {}
+    for (let i = 0; i < s.length; i++) {
+        let char = s[i];
+        if (letters[char]) {
+            letters[char] += 1
+        } else {
+            letters[char] = 1
+        }
+    }
+    for (let j = 0; j < t.length; j++) {
+        let char = t[j]
+        if (letters[char]) {
+            letters[char] -= 1
+        } else {
+            letters[char] = -1
+        }
+    }
+    return Object.keys(letters).every((k) => letters[k] === 0)
+};
+
+// You are given an array prices where prices[i] is the price of a given stock on the ith day.
+// Find the maximum profit you can achieve.You may complete as many transactions as you like(i.e., buy one and sell one share of the stock multiple times).
+//     Note: You may not engage in multiple transactions simultaneously(i.e., you must sell the stock before you buy again).
+
+var maxProfit = function (prices) {
+    let profit = 0;//currentprofit
+    for (let i = 0; i < prices.length - 1; i++) {//iteratiing through the days
+        let tempProf = prices[i + 1] - prices[i]; //checking the current profit
+        profit = Math.max(profit, tempProf + profit) //pprofit will only be replaced if the current profit will add to the overall profit
+    }
+    return profit
+};
+
+// Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+// Note that you must do this in -place without making a copy of the array.
+
+var moveZeroes = function (nums) {
+    let indx = 0;
+    let count = 0;
+    while (indx < nums.length - 1) {
+        if (nums[indx] === 0) {
+            nums.splice(indx, 1)
+            indx -= 1
+            count += 1
+        }
+        indx += 1
+    }
+    for (let repeat = 1; repeat <= count; repeat++) {
+        nums.push(0)
+    }
+    return nums
+};
+
+
+// Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+var containsDuplicate = function (nums) {
+    let seen = {};
+    nums.forEach((number) => {
+        if (seen[number]) {
+            seen[number] += 1
+        } else {
+            seen[number] = 1
+        }
+    })
+    return Object.keys(seen).some((key) => seen[key] >= 2)
+};
+
+//better solution
+var containsDuplicate = function (nums) {
+    return nums.length !== new Set(nums).size
+};
