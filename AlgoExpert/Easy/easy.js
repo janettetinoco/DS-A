@@ -265,3 +265,76 @@ function minimumWaitingTime(queries) {
     }
     return totalWaitingTime
 }
+
+
+function caesarCipherEncryptor(string, key) { //"xyz", 2
+    // Write your code here.
+    const alpha = "abcdefghijklmnopqrstuvwxyz";
+    let newString = "";//"zab"
+    for (let idx = 0; idx < string.length; idx++) {//2: z
+        let newCharIdx = alpha.indexOf(string[idx]) + key;//25+2 =27
+        newString += alpha[newCharIdx % 26]//b
+    }
+    return newString;//"zab"
+}
+
+
+function runLengthEncoding(string) {//"AAAAAAAAAAAAB B"
+    // Write your code here.
+    let index = 0;//13
+    let count = 1;//2
+    let encoded = "";//"9A3A2B"
+    while (index < string.length) {//13 < 14
+        let currChar = string[index] // B
+        let nextChar = string[index + 1] //null
+        if (nextChar === currChar && count < 9) {
+            count += 1;
+        } else if (nextChar === currChar || nextChar !== currChar) {
+            encoded += `${count}` + currChar
+            count = 1;
+        }
+        index++
+    }
+    return encoded;
+}
+
+function generateDocument(characters, document) {
+    // Write your code here.
+    let charCounts = {};
+    let documentCounts = {};
+    for (let indx = 0; indx < characters.length; indx++) {
+        let char = characters[indx]
+        charCounts[char] = charCounts[char] ? charCounts[char] + 1 : 1
+    }
+    for (let indx = 0; indx < document.length; indx++) {
+        let char = document[indx]
+        documentCounts[char] = documentCounts[char] ? documentCounts[char] + 1 : 1
+    }
+    return Object.keys(documentCounts).every((char) => charCounts[char] >= documentCounts[char]);
+}
+
+//Depth First Search of Tree
+//// Do not edit the line below.
+
+class Node {
+    constructor(name) {
+        this.name = name;
+        this.children = [];
+    }
+
+    addChild(name) {
+        this.children.push(new Node(name));
+        return this;
+    }
+
+    depthFirstSearch(array) {
+        // Write your code here.
+        array.push(this.name)
+        let current = this;
+        let queue = current.children
+        for (let i = 0; i < queue.length; i++) {
+            queue[i].depthFirstSearch(array)
+        }
+        return array
+    }
+}

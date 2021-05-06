@@ -249,3 +249,37 @@ var containsDuplicate = function (nums) {
 var containsDuplicate = function (nums) {
     return nums.length !== new Set(nums).size
 };
+
+
+//Given a Roman Numeral convert to Int
+var romanToInt = function (s) {//MCMXCIV
+    let total = 0;//1994
+    const convert = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    }
+    const specCases = {
+        "IV": 4,
+        "IX": 9,
+        "XL": 40,
+        "XC": 90,
+        "CD": 400,
+        "CM": 900
+    }
+    for (let indx = 0; indx < s.length; indx++) {//6
+        let pair = s.slice(indx, indx + 2)//IV
+        if (specCases[pair]) {
+            total += specCases[pair]
+            indx++
+        } else {
+            total += convert[s[indx]]
+        }
+    }
+    return total
+};
+
