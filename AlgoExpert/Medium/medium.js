@@ -67,3 +67,23 @@ function smallestDifference(arrayOne, arrayTwo) {
     }
     return pair
 }
+
+//Move all instances of toMove in the array to the end. manipulate the array
+//Time O(n) | Space O(1) 
+function moveElementToEnd(array, toMove) {
+    // Write your code here.
+    let i = 0;
+    let j = array.length - 1
+    while (i < j) {
+        if (array[i] === toMove && array[j] !== toMove) {
+            [array[i], array[j]] = [array[j], array[i]]
+        } else if (array[j] === toMove && array[i] === toMove) {
+            j -= 1
+        } else if (array[i] !== toMove && array[j] !== toMove) {
+            i += 1
+        } else {
+            j -= 1
+        }
+    }
+    return array
+}
