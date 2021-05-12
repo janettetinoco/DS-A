@@ -43,3 +43,27 @@ function smallestDifference(arrayOne, arrayTwo) {
     }
     return pair
 }
+
+//Time O(mlog m + nlogn) | Space O(1)
+function smallestDifference(arrayOne, arrayTwo) {
+    // Write your code here.
+    arrayOne.sort((a, b) => a - b)
+    arrayTwo.sort((a, b) => a - b)
+    let indx1 = 0;
+    let indx2 = 0;
+    let difference = Infinity;
+    let pair = []
+    while (indx1 < arrayOne.length && indx2 < arrayTwo.length) {
+        let left = arrayOne[indx1];
+        let right = arrayTwo[indx2];
+        let tempDiff = Math.abs(left - right)
+        if (tempDiff < difference) {
+            difference = tempDiff;
+            pair = [left, right]
+            left < right ? indx1 += 1 : indx2 += 1
+        } else {
+            left < right ? indx1 += 1 : indx2 += 1
+        }
+    }
+    return pair
+}
