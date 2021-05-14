@@ -102,3 +102,38 @@ function moveElementToEnd(array, toMove) {
     }
     return array
 }
+
+//Find the firs non-repeating character and return the index
+//Time O(n^2) | Space O(1) 
+function firstNonRepeatingCharacter(string) {
+    // Write your code here.
+    for (let i = 0; i < string.length; i++) {
+        let currChar = string[i]
+        let found = false;
+        for (let j = 0; j < string.length; j++) {
+            if (string[j] === currChar && i !== j) {
+                found = true
+            };
+        }
+        if (!found) return i
+    }
+    return -1
+}
+//Optimized
+// Time O(n) | Space O(1)-because hash map has max length 26
+function firstNonRepeatingCharacter(string) {
+    // Write your code here.
+    let collection = {};
+    for (let i = 0; i < string.length; i++) {
+        let char = string[i]
+        if (!collection[char]) {
+            collection[char] = 1
+        } else {
+            collection[char] += 1
+        }
+    }
+    for (let i = 0; i < string.length; i++) {
+        if (collection[string[i]] === 1) return i
+    }
+    return -1;
+}
