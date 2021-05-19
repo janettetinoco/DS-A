@@ -283,3 +283,13 @@ var romanToInt = function (s) {//MCMXCIV
     return total
 };
 
+
+//shuffle the string based on the indices
+//Time O(n) | Space O(n)
+var restoreString = function (s, indices) {
+    let finalString = new Array(s.length);
+    for (let i = 0; i < indices.length; i++) {
+        finalString[indices[i]] = s[i]
+    }
+    return finalString.join("")
+};
