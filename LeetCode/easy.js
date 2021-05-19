@@ -293,3 +293,13 @@ var restoreString = function (s, indices) {
     }
     return finalString.join("")
 };
+//How many steps to get to 0 if evens divide by 2 and odds subtract 1
+var numberOfSteps = function (num, steps = 0) {//14
+    if (num === 0) return steps;
+    if (num % 2 === 0) {
+        return numberOfSteps(num / 2, steps + 1)//7, 1
+    } else {
+        return numberOfSteps(num - 1, steps + 1)
+    }
+};
+
