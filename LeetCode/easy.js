@@ -303,3 +303,27 @@ var numberOfSteps = function (num, steps = 0) {//14
     }
 };
 
+
+//Given nums array and inices array encode an array by placing the elements in
+//the order the indices provide
+//Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
+//Output: [0, 4, 1, 3, 2]
+
+//Time O(n^2) |Space O(n)
+var createTargetArray = function (nums, index) {
+    let final = [];
+    for (let i = 0; i < nums.length; i++) {
+        final.splice(index[i], 0, nums[i])
+    }
+    return final
+};
+
+
+// var createTargetArray = function(nums, index) {
+// 	return nums.reduce((acc, curr, idx) => {
+// 		acc.splice(index[idx], 0, curr)
+// 		return acc
+// 	}, [])
+// };
+
+
